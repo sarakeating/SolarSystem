@@ -1,6 +1,7 @@
 '''
 Ｓｏｌａｒ Ｓｙｓｔｅｍ
-This program uses pygame to make a cute little animation of planets in orbit
+This program uses pygame to make a cute little animation of planets in orbit.
+The planets can be sped up or slowed down by pressing the arrow keys.
 ~Sara Keating~
 '''
 
@@ -14,10 +15,11 @@ def main():
     # set up
     screen = set_screen()
     centre_points_list = create_centre()
-    omega = create_angvel()
     angles_list = create_angles()
     star_list = create_stars()
     planets = create_planets(centre_points_list, angles_list)
+
+    speed = 0
 
     clock = pygame.time.Clock()
 
@@ -28,6 +30,14 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    speed += 0.01
+                elif event.key == pygame.K_DOWN:
+                    speed -= 0.01
+
+        omega = create_angvel(speed)
 
         move_planets(omega, angles_list, planets)
         ring_list = move_ring(planets)

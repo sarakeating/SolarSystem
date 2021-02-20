@@ -29,6 +29,7 @@ def draw_stars(screen, list):
         elif star_time % 4 == 3:
             pygame.draw.circle(screen, LYELLOW, [stars2[s][0], stars2[s][1]], stars2[s][2])
 
+
 def draw_sun(screen, centre):
     '''Drawing sun'''
     # drawing it in the centre of the screen
@@ -50,7 +51,8 @@ def draw_orbits(screen, planets):
         # x/y radius times 2
         ell_w = planets[orb][0] * 2
         ell_h = planets[orb][1] * 2
-        pygame.draw.ellipse(screen, WHITE, [ell_x, ell_y, ell_w, ell_h], 1)
+        pygame.draw.ellipse(screen, WHITE, [ell_x, ell_y, ell_w, ell_h], 2)
+
 
 def draw_planets(screen, planets, rings):
     '''Drawing the planets'''
