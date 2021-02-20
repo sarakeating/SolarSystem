@@ -24,12 +24,12 @@ def create_centre():
     return centre_of_rotation_x, centre_of_rotation_y
 
 
-def create_angvel():
+def create_angvel(varSpeed):
     '''Creating each planets' angular velocity'''
     omega = []
     # making them so they go at different speeds
-    for o in range(5, 9):
-        omega_values = 0.1 / o
+    for o in range(1, 5):
+        omega_values = 0.1 / o + varSpeed
         omega.append(omega_values)
     return omega
 
@@ -81,10 +81,10 @@ def move_planets(omegas, angles, planets):
     '''Moving the planets in orbit'''
     for v in range(4):
         # altering each planet's angle with it's own omega value
-        angles[v] += omegas[v]
+        angles[v] -= omegas[v]
         # changing x and y value for each planet to where it should go
-        planets[v][2] = planets[v][2] + planets[v][0] * omegas[v] * math.cos(angles[v] + math.pi / 2)
-        planets[v][3] = planets[v][3] - planets[v][1] * omegas[v] * math.sin(angles[v] + math.pi / 2)
+        planets[v][2] = planets[v][0] * math.cos(angles[v]) + create_centre()[0]
+        planets[v][3] = planets[v][1] * math.sin(angles[v]) + create_centre()[1]
 
 
 def move_ring(planets):
